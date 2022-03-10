@@ -1,0 +1,85 @@
+html {
+    box-sizing: border-box;
+}
+
+*,  *::before, *::after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+}
+
+main {
+    background: rgb(115, 115, 158);
+    max-width: 800px;
+    padding: 10px;
+    text-align: center;
+    margin: 50px auto;
+    color: white;
+    border-radius: 15px;
+    box-shadow: 10px 10px 10px #ccc;
+}
+.header {
+    position: relative;
+}
+
+.score {
+    position: absolute;
+    margin: 0;
+    top: -10px;
+    font-size: 1.4rem;
+}
+
+.left {    
+    left: 0;
+}
+
+.right {
+    right: 0;
+}
+
+h2 {
+    font-size: 5rem;
+    transition: all 0.05s;
+    cursor: pointer;
+}
+
+h2:hover {
+    transform: scale(1.05);
+}
+
+/* .btn-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;    
+}
+
+button {
+    flex: 1;
+} */
+
+button {
+    font-size: 1.5rem;
+    background-color: white;
+    border: solid 1px #ccc;
+    border-radius: 8px;
+    width: 200px;
+    height: 50px;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+button:hover {
+    background: yellow;
+}
+
+.hide {
+    width: 0;
+    opacity: 0;
+}
+
+.expand {
+    width: 500px;
+    background: yellow;
+}

@@ -1,12 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <title>Document</title>
 </head>
+
 <body>
+    <main>
+        <div class="header">
+            <p class="score left">Player: <span class="scores player">0</span></p>
+            <p class="score right">Computer: <span class="scores computer">0</span></p>
+            <h1>Rock, Paper & Scissors</h1>
+        </div>
+        <h2>Pick your choice!</h2>
+        <div class="btn-container">
+            <button data-choice='Rock' class="">Rock</button>
+            <button data-choice='Paper' class="">Paper</button>
+            <button data-choice='Scissors' class="">Scissors</button>
+        </div>
+    </main>
+
     <script src="index.js"></script>
 </body>
+
 </html>
