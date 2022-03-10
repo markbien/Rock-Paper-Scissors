@@ -52,9 +52,6 @@ function startOver(){
     p2.textContent = computerScore;
     isThereAWinner = false;
     reset();
-    buttons.forEach(button => {
-        button.style.pointerEvents = 'auto';
-    })
 }
 
 // responsible for checking who won the round
@@ -142,23 +139,19 @@ function changeBackgroundColor(winner) {
 // checks if there is a winner
 function checkWinner() {
     let status = "";
-    if (playerScore === 5) {
+    if (playerScore === 1) {
         isThereAWinner = true;
         status = 'win';
     }
 
-    if (computerScore === 5) {
+    if (computerScore === 1) {
         isThereAWinner = true;
         status = 'lose';
     }
 
     if (isThereAWinner === true) {
         setTimeout(() => {
-            buttons.forEach(button => {
-                button.style.pointerEvents = 'none';
-            });
             play.textContent = `You ${status} the game! Click to restart.`;
-
             let color;
             if(status === 'win'){
                 color = 'Green';
