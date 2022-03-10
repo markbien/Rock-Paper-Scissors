@@ -19,7 +19,9 @@ main {
     color: white;
     border-radius: 15px;
     box-shadow: 10px 10px 10px #ccc;
+    transition: background-color 0.3s;
 }
+
 .header {
     position: relative;
 }
@@ -82,4 +84,5 @@ button:hover {
 .expand {
     width: 500px;
     background: yellow;
+    pointer-events: none;
 }

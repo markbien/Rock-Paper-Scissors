@@ -7,10 +7,12 @@ const titleRound = document.querySelector('h1');
 const play = document.querySelector('h2');
 const p1 = scores[0];
 const p2 = scores[1];
+const main = document.querySelector('main');
+let isThereAWinner = false;
 
 // Event Listeners
 buttons.forEach(button => button.addEventListener('click', selectChoice));
-play.addEventListener('click', reset);
+play.addEventListener('click', startOver);
 
 // Functions
 function computerPlay() {
@@ -34,37 +36,54 @@ function computerPlay() {
 //     return input.charAt(0).toUpperCase() + input.slice(1).toLowerCase();
 // }
 
+function startOver(){
+    playerScore = 0;
+    computerScore = 0;
+    p1.textContent =playerScore;
+    p2.textContent = computerScore;
+    isThereAWinner = false;
+    reset();
+    buttons.forEach(button => {
+        button.style.pointerEvents = 'auto';
+    })
+}
+
 function playGame(playerInput, computerInput) {
-    console.log(playerInput);
-    console.log(computerInput);
+    console.log("Player:", playerInput);
+    console.log("Computer:", computerInput);
     if (playerInput === "Rock" && computerInput === "Scissors") {
         // playerScore++;
         updateScore(p1, ++playerScore);
+        changeBackgroundColor('win');
         // return "You win! Rock beats Scissors";
     } else if (playerInput === "Rock" && computerInput === "Paper") {
         updateScore(p2, ++computerScore);
+        changeBackgroundColor('lose');
         // computerScore++;
         // return "You lose! Paper beats Rock";
     } else if (playerInput === "Paper" && computerInput === "Rock") {
         updateScore(p1, ++playerScore);
+        changeBackgroundColor('win');
         // playerScore++;
         // return "You win! Paper beats Rock";
     } else if (playerInput === "Paper" && computerInput === "Scissors") {
         updateScore(p2, ++computerScore);
+        changeBackgroundColor('lose');
         // computerScore++;
         // return "You lose! Scissors beats Paper";
     } else if (playerInput === "Scissors" && computerInput === "Paper") {
         updateScore(p1, ++playerScore);
+        changeBackgroundColor('win');
         // playerScore++;
         // return "You win! Scissors beats Paper";
     } else if (playerInput === "Scissors" && computerInput === "Rock") {
         updateScore(p2, ++computerScore);
+        changeBackgroundColor('lose');
         // computerScore++;
         // return "You lose! Rock beats Scissors";
+    } else {
+        changeBackgroundColor('tie');
     }
-    // } else {
-    //     return "Tie!";
-    // }
 }
 
 function selectChoice() {
@@ -81,25 +100,76 @@ function selectChoice() {
     // battles the computer
     playGame(choice, computerPlay());
 
-
     // resets choices after 3 seconds
     setTimeout(reset, 3000);
 }
 
 function reset() {
-    this.textContent = 'Pick your choice!';
-    buttons.forEach(button => {
-        button.classList.remove('expand');
-        button.classList.remove('hide');
-    });
+    if(isThereAWinner === false){
+        this.textContent = 'Pick your choice!';
+        buttons.forEach(button => {
+            button.classList.remove('expand');
+            button.classList.remove('hide');
+        });
+        main.style.backgroundColor = 'rgb(115, 115, 158)';
+        play.textContent = 'Pick your choice!';
+    }    
 }
 
 // update scores
 function updateScore(player, score) {
     player.textContent = score;
-    console.dir(player.textContent);
+    console.log("Score: ", player.textContent);
+    checkWinner();
 }
 
 // test score update
 // updateScore(scores[0], playerScore + 1);
 // updateScore(scores[1], computerScore + 2);
+
+function changeBackgroundColor(winner) {
+    if (winner === 'win') {
+        console.log('win');
+        main.style.backgroundColor = 'Green';
+        play.textContent = 'You won!';
+    } else if (winner === 'lose') {
+        console.log('lose');
+        main.style.backgroundColor = 'Red';
+        play.textContent = 'You lose!';
+    } else if (winner === 'tie') {
+        main.style.backgroundColor = 'Orange';
+        play.textContent = 'Tie!';
+        console.log('tie');
+    }
+}
+
+// checks if there is a winner
+function checkWinner() {
+    let status = "";
+    if (playerScore === 2) {
+        isThereAWinner = true;
+        status = 'win';
+    }
+
+    if (computerScore === 2) {
+        isThereAWinner = true;
+        status = 'lose';
+    }
+
+    if (isThereAWinner === true) {
+        setTimeout(() => {
+            buttons.forEach(button => {
+                button.style.pointerEvents = 'none';
+            });
+            play.textContent = `You ${status} the game! Click to restart.`;
+
+            let color;
+            if(status === 'win'){
+                color = 'Green';
+            } else {
+                color = 'Red';
+            }
+            main.style.backgroundColor = color;
+        }, 1000);
+    }
+}
