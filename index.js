@@ -146,12 +146,12 @@ function changeBackgroundColor(winner) {
 // checks if there is a winner
 function checkWinner() {
     let status = "";
-    if (playerScore === 2) {
+    if (playerScore === 5) {
         isThereAWinner = true;
         status = 'win';
     }
 
-    if (computerScore === 2) {
+    if (computerScore === 5) {
         isThereAWinner = true;
         status = 'lose';
     }
